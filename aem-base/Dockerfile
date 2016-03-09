@@ -7,7 +7,7 @@ ENV BUILD_VERSION b02
 ENV CQ_FOREGROUND y
 ENV CQ_VERBOSE    y
 ENV CQ_NOBROWSER  y
-ENV CQ_JVM_OPTS   "-server -Xmx1024M -Xms512M -XX:MaxPermSize=512M"
+ENV CQ_JVM_OPTS   "-server -Xmx1024M -Xms512M"
 ENV AEM_QUICKSTART_FILE AEM_6.1_Quickstart.jar
 ENV AEM_WORKING_DIR /opt/aem
 # Upgrading system
@@ -28,10 +28,11 @@ ADD license.properties $AEM_WORKING_DIR/license.properties
 
 # Extracts AEM
 WORKDIR $AEM_WORKING_DIR
-RUN java -XX:MaxPermSize=512m -Xmx2024M -jar $AEM_QUICKSTART_FILE -unpack -r nosamplecontent -v
+RUN java -Xmx2024M -jar $AEM_QUICKSTART_FILE -unpack -r nosamplecontent -v
 
 RUN mkdir -p $AEM_WORKING_DIR/crx-quickstart/install
 ADD hotfix/* $AEM_WORKING_DIR/crx-quickstart/install/
+ADD start $AEM_WORKING_DIR/crx-quickstart/bin/start
 
 
 ENV JAVA_HOME /usr/java/latest
