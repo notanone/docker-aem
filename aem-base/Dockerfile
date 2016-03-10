@@ -1,4 +1,5 @@
 FROM centos:7
+MAINTAINER Yury Bialykh
 
 # Java
 ENV JAVA_VERSION 8u74
