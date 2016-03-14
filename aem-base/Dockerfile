@@ -35,6 +35,8 @@ RUN mkdir -p $AEM_WORKING_DIR/crx-quickstart/install
 ADD hotfix/* $AEM_WORKING_DIR/crx-quickstart/install/
 ADD start $AEM_WORKING_DIR/crx-quickstart/bin/start
 
+# Adding whatever author/publish specific packages are out there
+ONBUILD ADD packages/* $AEM_WORKING_DIR/crx-quickstart/install/
 
 ENV JAVA_HOME /usr/java/latest
 
