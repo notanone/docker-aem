@@ -11,10 +11,16 @@ ENV CQ_NOBROWSER  y
 ENV CQ_JVM_OPTS   "-server -Xmx1024M -Xms512M"
 ENV AEM_QUICKSTART_FILE AEM_6.1_Quickstart.jar
 ENV AEM_WORKING_DIR /opt/aem
+ENV AEM_CONFIG_SCRIPT_DIR /opt/aem-config
+ENV AEM_CONFIG_JAR aem-config.jar
+
 # Upgrading system
 RUN yum -y upgrade && \
     yum -y install wget && \
+    yum -y install python-setuptools && \
     yum clean all
+
+RUN easy_install supervisor
 
 # Downloading Java
 RUN wget --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/$JAVA_VERSION-$BUILD_VERSION/jre-$JAVA_VERSION-linux-x64.rpm" -O /tmp/jre-8-linux-x64.rpm
@@ -26,6 +32,8 @@ RUN yum -y install /tmp/jre-8-linux-x64.rpm && \
 #Copies required build media
 ADD $AEM_QUICKSTART_FILE $AEM_WORKING_DIR/$AEM_QUICKSTART_FILE
 ADD license.properties $AEM_WORKING_DIR/license.properties
+ADD $AEM_CONFIG_JAR $AEM_CONFIG_SCRIPT_DIR/$AEM_CONFIG_JAR
+ADD supervisord.conf /etc/supervisord.conf
 
 # Extracts AEM
 WORKDIR $AEM_WORKING_DIR

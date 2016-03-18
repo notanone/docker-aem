@@ -99,6 +99,7 @@ START_OPTS="start -c ${CURR_DIR} -i launchpad"
 if [ $CQ_PORT ]; then
 	START_OPTS="${START_OPTS} -p ${CQ_PORT}"
 fi
+
 if [ $CQ_RUNMODE ]; then
 	CQ_JVM_OPTS="${CQ_JVM_OPTS} -Dsling.run.modes=${CQ_RUNMODE}"
 fi
@@ -115,6 +116,7 @@ fi
 if [ $CQ_MONGO_DB ]; then
     START_OPTS="${START_OPTS} -Doak.mongo.db=${CQ_MONGO_DB}"
 fi
+
 
 if [ $CQ_USE_JAAS ]; then
     CQ_JVM_OPTS="${CQ_JVM_OPTS} -Djava.security.auth.login.config=${CQ_JAAS_CONFIG}"
