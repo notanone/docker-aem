@@ -20,7 +20,8 @@ RUN yum -y upgrade && \
     yum -y install python-setuptools && \
     yum clean all
 
-RUN easy_install supervisor
+RUN easy_install supervisor && \
+    easy_install supervisor-stdout
 
 # Downloading Java
 RUN wget --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/$JAVA_VERSION-$BUILD_VERSION/jre-$JAVA_VERSION-linux-x64.rpm" -O /tmp/jre-8-linux-x64.rpm
@@ -42,9 +43,6 @@ RUN java -Xmx2024M -jar $AEM_QUICKSTART_FILE -unpack -r nosamplecontent -v
 RUN mkdir -p $AEM_WORKING_DIR/crx-quickstart/install
 ADD hotfix/* $AEM_WORKING_DIR/crx-quickstart/install/
 ADD start $AEM_WORKING_DIR/crx-quickstart/bin/start
-
-# Adding whatever author/publish specific packages are out there
-ONBUILD ADD packages/* $AEM_WORKING_DIR/crx-quickstart/install/
 
 ENV JAVA_HOME /usr/java/latest
 
