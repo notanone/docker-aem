@@ -6,4 +6,4 @@ ENV CQ_PORT 4502
 
 EXPOSE $CQ_PORT
 
-CMD ["/usr/bin/supervisord"]
+CMD $AEM_WORKING_DIR/crx-quickstart/bin/start
