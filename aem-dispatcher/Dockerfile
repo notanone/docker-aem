@@ -1,9 +1,9 @@
 FROM centos:7
 MAINTAINER Yury Bialykh
 
-ENV DISPATCHER_FILE dispatcher-apache2.4-4.1.12.so   
-ENV DISPATCHER_TAR dispatcher-apache2.4-linux-x86-64-ssl10-4.1.12.tar.gz
-ENV DISPATCHER_MOD_URL https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher/_jcr_content/top/download_11/file.res/$DISPATCHER_TAR
+ENV DISPATCHER_FILE dispatcher-apache2.4-4.2.0.so   
+ENV DISPATCHER_TAR dispatcher-apache2.4-linux-x86-64-ssl-4.2.0.tar.gz
+ENV DISPATCHER_MOD_URL https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher/_jcr_content/top/download_9/file.res/$DISPATCHER_TAR
 ENV HTTPD_LOG_DIR /var/log/httpd
 
 RUN yum -y update && \
