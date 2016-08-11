@@ -9,7 +9,7 @@ ENV BUILD_VERSION b02
 ENV CQ_FOREGROUND y
 ENV CQ_VERBOSE    y
 ENV CQ_NOBROWSER  y
-ENV CQ_JVM_OPTS   "-server -Xmx1024M -Xms512M"
+ENV CQ_JVM_OPTS   "-server -Xmx1024M -Xms512M -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n"
 ENV AEM_QUICKSTART_FILE AEM_Quickstart.jar
 ENV AEM_WORKING_DIR /opt/aem
 
@@ -28,7 +28,7 @@ RUN yum -y install /tmp/jre-8-linux-x64.rpm && \
 
 #Copies required build data
 COPY $AEM_QUICKSTART_FILE $AEM_WORKING_DIR/$AEM_QUICKSTART_FILE
-COPY license.properties $AEM_WORKING_DIR/license.properties
+OPY license.properties $AEM_WORKING_DIR/license.properties
 
 # Extracts AEM
 WORKDIR $AEM_WORKING_DIR
