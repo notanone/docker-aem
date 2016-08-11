@@ -28,7 +28,7 @@ RUN yum -y install /tmp/jre-8-linux-x64.rpm && \
 
 #Copies required build data
 COPY $AEM_QUICKSTART_FILE $AEM_WORKING_DIR/$AEM_QUICKSTART_FILE
-OPY license.properties $AEM_WORKING_DIR/license.properties
+COPY license.properties $AEM_WORKING_DIR/license.properties
 
 # Extracts AEM
 WORKDIR $AEM_WORKING_DIR
