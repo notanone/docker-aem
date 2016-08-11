@@ -9,7 +9,7 @@ ENV BUILD_VERSION b14
 ENV CQ_FOREGROUND y
 ENV CQ_VERBOSE    y
 ENV CQ_NOBROWSER  y
-ENV CQ_JVM_OPTS   "-server -Xmx1024M -Xms512M -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n"
+ENV CQ_JVM_OPTS   "-server -Xmx1536M -Xms512M -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n"
 ENV AEM_QUICKSTART_FILE AEM_Quickstart.jar
 ENV AEM_WORKING_DIR /opt/aem
 
