@@ -2,8 +2,9 @@ FROM centos:7
 MAINTAINER Yury Bialykh
 
 # Java
-ENV JAVA_VERSION 8u102
-ENV BUILD_VERSION b14
+ENV JAVA_VERSION 8u144
+ENV BUILD_VERSION b01
+ENV JAVA_URL_HASH 090f390dda5b47b9b721c7dfaa008135
 
 # AEM
 ENV CQ_FOREGROUND y
@@ -19,7 +20,7 @@ RUN yum -y upgrade && \
     yum clean all
     
 # Downloading Java
-RUN wget --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/$JAVA_VERSION-$BUILD_VERSION/jre-$JAVA_VERSION-linux-x64.rpm" -O /tmp/jre-8-linux-x64.rpm
+RUN wget --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/$JAVA_VERSION-$BUILD_VERSION/$JAVA_URL_HASH/jre-$JAVA_VERSION-linux-x64.rpm" -O /tmp/jre-8-linux-x64.rpm
 
 # Installing Java
 RUN yum -y install /tmp/jre-8-linux-x64.rpm && \
@@ -37,6 +38,7 @@ RUN java -Xmx2024M -jar $AEM_QUICKSTART_FILE -unpack -r nosamplecontent -v
 RUN mkdir -p $AEM_WORKING_DIR/crx-quickstart/install
 COPY packages/ $AEM_WORKING_DIR/crx-quickstart/install/
 COPY start $AEM_WORKING_DIR/crx-quickstart/bin/start
+RUN chmod +x $AEM_WORKING_DIR/crx-quickstart/bin/start
 
 ENV JAVA_HOME /usr/java/latest
 
